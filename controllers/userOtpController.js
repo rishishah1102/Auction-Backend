@@ -9,7 +9,7 @@ const userOtpController = async (req, res) => {
             username,
             email
         });
-
+        
         // generate token for authentication
         const token = jwt.sign({ user }, process.env.TOKEN_KEY);
 

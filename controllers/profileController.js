@@ -6,8 +6,8 @@ const profileController = async (req, res) => {
         const { ImgUrl, teamname } = req.body;
 
         const existingUser = await userModel.findOne({ email: email });
-        existingUser.profile.ImgUrl = ImgUrl || existingUser.profile.ImgUrl;
-        existingUser.profile.teamname = teamname || existingUser.profile.teamname;
+        existingUser.ImgUrl = ImgUrl || existingUser.profile.ImgUrl;
+        existingUser.teamname = teamname || existingUser.profile.teamname;
         const saveprofile = await existingUser.save();
 
         res.status(201).send({
