@@ -1,5 +1,5 @@
 const jwt = require("jsonwebtoken");
-const userModel = require("../models/userModel.js");
+const userModel = require("../../models/userModel.js");
 
 const userOtpController = async (req, res) => {
     const { email, username } = req.body;

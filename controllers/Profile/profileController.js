@@ -1,4 +1,4 @@
-const userModel = require("../models/userModel.js");
+const userModel = require("../../models/userModel.js");
 
 const profileController = async (req, res) => {
     try {

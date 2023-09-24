@@ -1,12 +1,20 @@
 const express = require("express");
-const profileController = require("../controllers/profileController");
-const registerController = require("../controllers/registerController");
-const loginController = require("../controllers/loginController");
-const loginOtpController = require("../controllers/loginOtpController");
-const userOtpController = require("../controllers/userOtpController");
+
+// profile
+const profileController = require("../controllers/Profile/profileController");
+
+// auth
+const registerController = require("../controllers/Auth/registerController");
+const loginController = require("../controllers/Auth/loginController");
+const loginOtpController = require("../controllers/Auth/loginOtpController");
+const userOtpController = require("../controllers/Auth/userOtpController");
+
+// home
+const userDetailsController = require("../controllers/Home/userDetailsController");
+
+// middlewares
 const verifyToken = require("../middlewares/auth");
 const router = express.Router();
-
 
 //SIGNUP || METHOD POST
 router.post("/signup", registerController);
@@ -21,6 +29,9 @@ router.post("/otp", userOtpController);
 router.post("/loginotp", loginOtpController);
 
 // PROFILE || METHOD POST
-router.post("/profile",verifyToken, profileController);
+router.post("/profile", verifyToken, profileController);
+
+// HOME || METHOD GET
+router.get("/home", verifyToken, userDetailsController);
 
 module.exports = router;

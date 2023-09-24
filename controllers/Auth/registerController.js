@@ -1,7 +1,7 @@
-const userModel = require("../models/userModel.js");
-const sendEmail = require("../utils/sendEmail.js");
+const userModel = require("../../models/userModel.js");
+const sendEmail = require("../../utils/sendEmail.js");
 
-const loginController = async (req, res) => {
+const registerController = async (req, res) => {
     try {
         function getRandomNumber(min, max) {
             // Generate a random decimal number between 0 and 1
@@ -23,20 +23,18 @@ const loginController = async (req, res) => {
 
         const { email } = req.body;
 
-        // check user
-        const user = await userModel.findOne({ email });
-
-        // if user doesn't exist
-        if (!user) {
-            return res.status(404).send({
+        // Check if user already exists
+        const existingUser = await userModel.findOne({ email: email });
+        if (existingUser) {
+            res.status(409).send({
                 success: false,
-                message: "User not found. Please register first",
+                message: "Already Registered. Please login.",
             });
         }
-        else{
+        else {
             await sendEmail({
                 email: email,
-                subject: `About Login`,
+                subject: `About Registration`,
                 message,
             });
             res.status(201).send({
@@ -45,15 +43,14 @@ const loginController = async (req, res) => {
                 otp
             });
         }
-    }
 
-    catch (error) {
+    } catch (error) {
         res.status(500).send({
             success: false,
-            message: "Error in Login",
+            message: "Error in Registration",
             error,
         });
     }
-}
+};
 
-module.exports = loginController;
+module.exports = registerController;
