@@ -20,6 +20,21 @@ const userSchema = new mongoose.Schema({
     required: true,
     default: "your team",
   },
+  squad: [
+    {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "Player",
+    },
+  ],
+  auctions: {
+    type: Array,
+  },
+  squadScores: {
+    type: Array,
+  },
+  isAuctioneer: {
+    type: Boolean,
+  },
 });
 
 module.exports = userSchema;
