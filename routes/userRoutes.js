@@ -12,6 +12,9 @@ const userOtpController = require("../controllers/Auth/userOtpController");
 // home
 const userDetailsController = require("../controllers/Home/userDetailsController");
 
+// points table
+const getUserPtController = require("../controllers/PointsTable/getUserPtController");
+
 // middlewares
 const verifyToken = require("../middlewares/auth");
 const router = express.Router();
@@ -33,5 +36,8 @@ router.post("/profile", verifyToken, profileController);
 
 // HOME || METHOD GET
 router.get("/home", verifyToken, userDetailsController);
+
+// POINTSTABLE || METHOD GET
+router.get("/pointstable", verifyToken, getUserPtController);
 
 module.exports = router;
