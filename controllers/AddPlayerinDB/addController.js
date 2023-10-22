@@ -6,10 +6,10 @@ const matchModel = require("../../models/matchModel");
 const addController = async (req, res) => {
   try {
     const player = {
-      playerName: "Iftikhar Ahmed",
-      country: "Pakistan",
-      currentTeam: "saladkardurvesh@gmail.com",
-      sellingPrice: 4.2,
+      playerName: "Steve Smith",
+      country: "Australia",
+      currentTeam: "sinojiyaheet7@gmail.com",
+      sellingPrice: 17,
       basePrice: 0.5,
       playerType: "All-Rounder",
     };

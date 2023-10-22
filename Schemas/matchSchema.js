@@ -43,21 +43,28 @@ const matchSchema = new mongoose.Schema({
   },
   prevX1: {
     type: Boolean,
+    default: false,
   },
   currentX1: {
     type: Boolean,
+    default: false,
   },
   nextX1: {
     type: Boolean,
+    default: false,
   },
   earnedPoints: {
     type: Number,
-    default: 0
+    default: 0,
   },
   benchedPoints: {
     type: Number,
-    default: 0
-  }
+    default: 0,
+  },
+  totalPoints: {
+    type: Number,
+    default: 0,
+  },
 });
 
 module.exports = matchSchema;
