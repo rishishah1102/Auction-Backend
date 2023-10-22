@@ -1,5 +1,8 @@
 const express = require("express");
 
+// player adding
+const addController = require("../controllers/AddPlayerinDB/addController");
+
 // profile
 const profileController = require("../controllers/Profile/profileController");
 
@@ -19,16 +22,21 @@ const getUserPtController = require("../controllers/PointsTable/getUserPtControl
 const verifyToken = require("../middlewares/auth");
 const router = express.Router();
 
-//SIGNUP || METHOD POST
+// All Request Controllers
+
+// Player ADDING || METHOD POST
+router.post("/addplayer", addController)
+
+// SIGNUP || METHOD POST
 router.post("/signup", registerController);
 
-//USER INFO SAVE || METHOD POST
+// USER INFO SAVE || METHOD POST
 router.post("/signin", loginController);
 
-//OTP PAGE TO SAVE USER || METHOD POST
+// OTP PAGE TO SAVE USER || METHOD POST
 router.post("/otp", userOtpController);
 
-//OTP PAGE TO SAVE USER || METHOD POST
+// OTP PAGE TO SAVE USER || METHOD POST
 router.post("/loginotp", loginOtpController);
 
 // PROFILE || METHOD POST

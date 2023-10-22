@@ -16,10 +16,12 @@ const playerSchema = new mongoose.Schema({
   iplTeam: {
     type: String,
     required: true,
+    default: "--",
   },
   prevTeam: {
     type: String,
     required: true,
+    default: "--",
   },
   currentTeam: {
     type: String,
@@ -33,6 +35,7 @@ const playerSchema = new mongoose.Schema({
   prevFantasyPoints: {
     type: Number,
     required: true,
+    default: 0,
   },
   currentFantasyPoints: {
     type: Number,
@@ -41,6 +44,10 @@ const playerSchema = new mongoose.Schema({
   },
   sellingPrice: {
     type: Number,
+  },
+  match: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: "Match",
   },
 });
 
