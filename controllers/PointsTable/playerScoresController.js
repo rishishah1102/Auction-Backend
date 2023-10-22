@@ -2,8 +2,9 @@ const playerModel = require("../../models/playerModel");
 
 const playerScoresController = async (req, res) => {
   try {
-    const { email } = req.body;
-    const scoreboard = await playerModel.aggregate([
+    const email = req.body.email;
+
+    const playerscores = await playerModel.aggregate([
       {
         $match: {
           currentTeam: email,
@@ -42,7 +43,7 @@ const playerScoresController = async (req, res) => {
       },
     ]);
 
-    res.status(200).send({ success: true, scoreboard });
+    res.status(200).send({ success: true, playerscores });
   } catch (error) {
     res.status(500).send({
       success: false,

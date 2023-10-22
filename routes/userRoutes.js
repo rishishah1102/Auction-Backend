@@ -19,6 +19,7 @@ const userDetailsController = require("../controllers/Home/userDetailsController
 const getUserPtController = require("../controllers/PointsTable/getUserPtController");
 const leaderBoardController = require("../controllers/PointsTable/leaderBoardController");
 const scoreBoardController = require("../controllers/PointsTable/scoreBoardController");
+const playerScoresController = require("../controllers/PointsTable/playerScoresController");
 
 // middlewares
 const verifyToken = require("../middlewares/auth");
@@ -53,7 +54,10 @@ router.get("/pointstable", verifyToken, getUserPtController);
 // LEADERBOARD || METHOD GET
 router.get("/leaderboard", verifyToken, leaderBoardController);
 
-// LEADERBOARD || METHOD GET
+// SCOREBOARD || METHOD GET
 router.get("/scoreboard", verifyToken, scoreBoardController);
+
+// PLAYERSCORES || METHOD POST
+router.post("/playerscores", verifyToken, playerScoresController);
 
 module.exports = router;
