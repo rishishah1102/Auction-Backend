@@ -34,6 +34,7 @@ const userSchema = new mongoose.Schema({
   },
   isAuctioneer: {
     type: Boolean,
+    default: false,
   },
 });
 

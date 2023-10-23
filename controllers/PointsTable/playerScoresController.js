@@ -41,9 +41,33 @@ const playerScoresController = async (req, res) => {
           matchData: 1, // Include the entire match data
         },
       },
+      {
+        $group: {
+          _id: "$username",
+          totalEp: { $sum: "$matchData.earnedPoints" },
+          totalBp: { $sum: "$matchData.benchedPoints" },
+          playerscores: { $push: "$$ROOT" },
+        },
+      },
+      {
+        $project: {
+          _id: 0,
+          username: "$_id",
+          totalEp: 1,
+          totalBp: 1,
+          playerscores: 1,
+        },
+      },
     ]);
 
-    res.status(200).send({ success: true, playerscores });
+    if (playerscores.length > 0) {
+      res.status(200).send({ success: true, playerscores: playerscores[0] });
+    } else {
+      res.status(404).send({
+        success: false,
+        message: "No data found for the given email.",
+      });
+    }
   } catch (error) {
     res.status(500).send({
       success: false,
