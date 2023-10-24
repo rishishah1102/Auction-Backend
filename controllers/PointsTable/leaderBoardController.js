@@ -25,6 +25,9 @@ const leaderBoardController = async (req, res) => {
         },
       },
       {
+        $unwind: "$playerMatches",
+      },
+      {
         $group: {
           _id: "$_id",
           name: { $first: "$username" },
