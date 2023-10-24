@@ -27,7 +27,6 @@ const changexiController = async (req, res) => {
               match10: 0,
               prevX1: match.currentX1,
               currentX1: match.nextX1,
-              nextX1: false,
             },
           }
         );
