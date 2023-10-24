@@ -20,6 +20,8 @@ const getUserPtController = require("../controllers/PointsTable/getUserPtControl
 const leaderBoardController = require("../controllers/PointsTable/leaderBoardController");
 const scoreBoardController = require("../controllers/PointsTable/scoreBoardController");
 const playerScoresController = require("../controllers/PointsTable/playerScoresController");
+const updateScoresController = require("../controllers/PointsTable/updateScoresController");
+const changexiController = require("../controllers/PointsTable/changexiController");
 
 // middlewares
 const verifyToken = require("../middlewares/auth");
@@ -59,5 +61,11 @@ router.get("/scoreboard", verifyToken, scoreBoardController);
 
 // PLAYERSCORES || METHOD POST
 router.post("/playerscores", verifyToken, playerScoresController);
+
+// UPDATEPLAYERSCORES || METHOD POST
+router.post("/updatescores", verifyToken, updateScoresController);
+
+// CHANGEXI || METHOD POST
+router.post("/changexi", verifyToken, changexiController);
 
 module.exports = router;

@@ -1,4 +1,6 @@
 const userModel = require("../../models/userModel");
+const playerModel = require("../../models/playerModel");
+const matchModel = require("../../models/matchModel");
 
 const leaderBoardController = async (req, res) => {
   try {

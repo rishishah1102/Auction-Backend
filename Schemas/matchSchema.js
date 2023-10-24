@@ -65,6 +65,18 @@ const matchSchema = new mongoose.Schema({
     type: Number,
     default: 0,
   },
+  prevTotalPoints: {
+    type: Number,
+    default: 0,
+  },
+  prevEarnedPoints: {
+    type: Number,
+    default: 0,
+  },
+  prevBenchedPoints: {
+    type: Number,
+    default: 0,
+  },
 });
 
 module.exports = matchSchema;
