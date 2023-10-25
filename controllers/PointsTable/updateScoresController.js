@@ -11,7 +11,8 @@ const updateScoresController = async (req, res) => {
       if (foundMatch[matchKey] !== score[matchKey]) {
         updateData[matchKey] = parseInt(score[matchKey]);
         updateData.totalPoints =
-          foundMatch.totalPoints +
+          foundMatch.totalPoints -
+          foundMatch[matchKey] +
           parseInt(score[matchKey]);
 
         const pointsKey = foundMatch.currentX1
@@ -22,7 +23,8 @@ const updateScoresController = async (req, res) => {
         //     ? "prevEarnedPoints"
         //     : "prevBenchedPoints";
         updateData[pointsKey] =
-          foundMatch[pointsKey] +
+          foundMatch[pointsKey] -
+          foundMatch[matchKey] +
           parseInt(score[matchKey]);
 
         await matchModel.findByIdAndUpdate(score.mid, updateData);
