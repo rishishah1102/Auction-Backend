@@ -23,6 +23,13 @@ const playerScoresController = require("../controllers/PointsTable/playerScoresC
 const updateScoresController = require("../controllers/PointsTable/updateScoresController");
 const changexiController = require("../controllers/PointsTable/changexiController");
 
+// players
+const getAllPlayerController = require("../controllers/Players/getAllPlayerController");
+
+// squads
+const getSquadController = require("../controllers/Squads/getSquadController");
+const getAllSquadController  = require("../controllers/Squads/getAllSquadController");
+
 // middlewares
 const verifyToken = require("../middlewares/auth");
 const router = express.Router();
@@ -67,5 +74,14 @@ router.post("/updatescores", verifyToken, updateScoresController);
 
 // CHANGEXI || METHOD POST
 router.post("/changexi", verifyToken, changexiController);
+
+// ALL PLAYERS || METHOD GET
+router.get("/players", verifyToken, getAllPlayerController);
+
+// ALL SQUAD || METHOD GET
+router.get("/squads", verifyToken, getSquadController);
+
+// ALL SQUAD || METHOD POST
+router.post("/squads", verifyToken, getAllSquadController);
 
 module.exports = router;
