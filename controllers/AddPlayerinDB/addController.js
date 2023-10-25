@@ -6,23 +6,23 @@ const matchModel = require("../../models/matchModel");
 const addController = async (req, res) => {
   try {
     const player = {
-      playerName: "Aryan Dutt",
-    sellingPrice: 0.35,
+      playerName: "Tim Southee",
+    sellingPrice: 8.1,
     basePrice: 0.5,
-    country: "India",
-    currentTeam: "aashil556@gmail.com",
+    country: "New Zealand",
+    currentTeam: "rocktheking27@gmail.com",
     playerType: "Bowler",
     };
 
     const match = new matchModel({
       prevX1: false,
-      currentX1: true,
-      nextX1: true,
-      earnedPoints: 259,
+      currentX1: false,
+      nextX1: false,
+      earnedPoints: 0,
       benchedPoints: 0,
-      totalPoints: 259,
-      prevTotalPoints: 259,
-      prevEarnedPoints: 259,
+      totalPoints: 0,
+      prevTotalPoints: 0,
+      prevEarnedPoints: 0,
       prevBenchedPoints: 0,
     });
     const savedMatch = await match.save();
