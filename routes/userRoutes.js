@@ -28,7 +28,10 @@ const getAllPlayerController = require("../controllers/Players/getAllPlayerContr
 
 // squads
 const getSquadController = require("../controllers/Squads/getSquadController");
-const getAllSquadController  = require("../controllers/Squads/getAllSquadController");
+const getAllSquadController = require("../controllers/Squads/getAllSquadController");
+
+// submission
+const submissionController = require("../controllers/Weekly-Team/submissionController");
 
 // middlewares
 const verifyToken = require("../middlewares/auth");
@@ -83,5 +86,8 @@ router.get("/squads", verifyToken, getSquadController);
 
 // ALL SQUAD || METHOD POST
 router.post("/squads", verifyToken, getAllSquadController);
+
+// SUBMISSION || METHOD POST
+router.post("/submission", verifyToken, submissionController);
 
 module.exports = router;
