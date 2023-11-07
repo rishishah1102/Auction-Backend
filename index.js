@@ -15,7 +15,13 @@ const app = express();
 
 const server = http.createServer(app);
 
-app.use(cors());
+app.use(
+  cors({
+    origin: "https://auction-ipl.vercel.app",
+    methods: ["GET", "POST"],
+  })
+);
+
 app.use(express.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
@@ -29,8 +35,8 @@ app.get("/", (req, res) => {
 const io = new Server(server, {
   cors: {
     // the socket will accept req from only react server
-    origin: "https://auction-ipl.vercel.app/",
-    methods: ["GET", "POST"]
+    origin: "https://auction-ipl.vercel.app",
+    methods: ["GET", "POST"],
   },
 });
 
