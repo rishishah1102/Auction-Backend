@@ -26,7 +26,13 @@ app.get("/", (req, res) => {
 });
 
 // socket io connection with server
-const io = new Server(server);
+const io = new Server(server, {
+  cors: {
+    // the socket will accept req from only react server
+    origin: "https://auction-ipl.vercel.app/",
+    methods: ["GET", "POST"]
+  },
+});
 
 // to track users in auction
 let auctionRoomUsers = {};
