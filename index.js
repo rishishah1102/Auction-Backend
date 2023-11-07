@@ -33,19 +33,44 @@ const io = new Server(server, {
   },
 });
 
+// to track users in auction
+let auctionRoomUsers = {};
+
 // When anybody connects with socket.io server connection event will triggered.
 io.on("connection", (socket) => {
   console.log(`User connected ${socket.id}`);
 
   // join the auction with auctionID
   socket.on("joinAuction", (aucId) => {
+    if (auctionRoomUsers[aucId] && auctionRoomUsers[aucId].length >= 10) {
+      // If the room is full, prevent the user from joining
+      socket.emit("auctionFull");
+      return;
+    }
+
     socket.join(aucId);
     console.log(`User with ID: ${socket.id} joined room: ${aucId}`);
+
+    // Track the user in the auction room
+    if (!auctionRoomUsers[aucId]) {
+      auctionRoomUsers[aucId] = [];
+    }
+    auctionRoomUsers[aucId].push(socket.id);
+
+    // Emit the updated list of users to all clients in the room
+    io.to(aucId).emit("updateUsers", auctionRoomUsers[aucId]);
   });
 
-  // when anyone disconnects with the server this event will trigger
   socket.on("disconnect", () => {
     console.log(`User disconnected ${socket.id}`);
+
+    // Remove the user from the auction room and emit the updated list
+    for (const aucId in auctionRoomUsers) {
+      auctionRoomUsers[aucId] = auctionRoomUsers[aucId].filter(
+        (id) => id !== socket.id
+      );
+      io.to(aucId).emit("updateUsers", auctionRoomUsers[aucId]);
+    }
   });
 });
 
