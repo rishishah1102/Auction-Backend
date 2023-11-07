@@ -29,7 +29,7 @@ app.get("/", (req, res) => {
 const io = new Server(server, {
   cors: {
     // the socket will accept req from only react server
-    origin: "http://localhost:3000",
+    origin: "https://auction-ipl.vercel.app/",
   },
 });
 
