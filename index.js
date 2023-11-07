@@ -38,6 +38,7 @@ const io = new Server(server, {
     origin: "https://auction-ipl.vercel.app",
     methods: ["GET", "POST"],
   },
+  transports: ["websocket", "polling"],
 });
 
 // to track users in auction
