@@ -1,6 +1,10 @@
 const mongoose = require("mongoose");
 
 const playerSchema = new mongoose.Schema({
+  playerNumber: {
+    type: Number,
+    required: true,
+  },
   playerName: {
     type: String,
     required: true,
@@ -48,6 +52,10 @@ const playerSchema = new mongoose.Schema({
   match: {
     type: mongoose.Schema.Types.ObjectId,
     ref: "Match",
+  },
+  unsold: {
+    type: Boolean,
+    default: false,
   },
 });
 

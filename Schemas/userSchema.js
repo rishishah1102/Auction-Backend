@@ -13,12 +13,12 @@ const userSchema = new mongoose.Schema({
   ImgUrl: {
     type: String,
     required: true,
-    default: "your image",
+    default: "--",
   },
   teamname: {
     type: String,
     required: true,
-    default: "your team",
+    default: "--",
   },
   squad: [
     {
@@ -26,11 +26,9 @@ const userSchema = new mongoose.Schema({
       ref: "Player",
     },
   ],
-  auctions: {
-    type: Array,
-  },
-  squadScores: {
-    type: Array,
+  isPlaying: {
+    type: Boolean,
+    default: false,
   },
   isAuctioneer: {
     type: Boolean,
