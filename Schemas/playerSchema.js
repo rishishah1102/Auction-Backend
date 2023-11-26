@@ -48,6 +48,7 @@ const playerSchema = new mongoose.Schema({
   },
   sellingPrice: {
     type: Number,
+    default: 0,
   },
   match: {
     type: mongoose.Schema.Types.ObjectId,
