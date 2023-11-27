@@ -40,7 +40,7 @@ const router = express.Router();
 // All Request Controllers
 
 // Player ADDING || METHOD POST
-router.post("/addplayer", addController);
+router.post("/addplayer", verifyToken, addController);
 
 // SIGNUP || METHOD POST
 router.post("/signup", registerController);

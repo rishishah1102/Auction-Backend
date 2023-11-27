@@ -4,7 +4,7 @@ const getUserPtController = async (req, res) => {
   try {
     // const { email } = req.user.user;
 
-    const aucPlayers = await userModel.find();
+    const aucPlayers = await userModel.find({ isPlaying: true });
     if (aucPlayers) {
       res.status(200).send({
         message: "Found the user",
@@ -13,9 +13,9 @@ const getUserPtController = async (req, res) => {
     }
   } catch (error) {
     res.status(500).send({
-        success: false,
-        message: "Error in fetching the data",
-        error,
+      success: false,
+      message: "Error in fetching the data",
+      error,
     });
   }
 };
