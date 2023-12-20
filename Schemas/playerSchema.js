@@ -54,6 +54,10 @@ const playerSchema = new mongoose.Schema({
     type: mongoose.Schema.Types.ObjectId,
     ref: "Match",
   },
+  sold: {
+    type: Boolean,
+    default: false,
+  },
   unsold: {
     type: Boolean,
     default: false,

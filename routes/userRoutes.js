@@ -1,5 +1,9 @@
 const express = require("express");
 
+// middlewares
+const verifyToken = require("../middlewares/auth");
+const router = express.Router();
+
 // player adding
 const addController = require("../controllers/AddPlayerinDB/addController");
 
@@ -33,9 +37,10 @@ const getAllSquadController = require("../controllers/Squads/getAllSquadControll
 // submission
 const submissionController = require("../controllers/Weekly-Team/submissionController");
 
-// middlewares
-const verifyToken = require("../middlewares/auth");
-const router = express.Router();
+// auction
+const hammerController = require("../controllers/Auction/hammerController");
+const sellPlayerController = require("../controllers/Auction/sellPlayerController");
+const unsellPlayerController = require("../controllers/Auction/unsellPlayerController");
 
 // All Request Controllers
 
@@ -89,5 +94,14 @@ router.post("/squads", verifyToken, getAllSquadController);
 
 // SUBMISSION || METHOD POST
 router.post("/submission", verifyToken, submissionController);
+
+// HAMMER || METHOD POST
+router.post("/hammer", verifyToken, hammerController);
+
+// HAMMER || METHOD POST
+router.post("/sellplayer", verifyToken, sellPlayerController);
+
+// HAMMER || METHOD POST
+router.post("/unsellplayer", verifyToken, unsellPlayerController);
 
 module.exports = router;
