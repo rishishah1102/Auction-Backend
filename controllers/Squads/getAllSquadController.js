@@ -28,11 +28,10 @@ const getAllSquadController = async (req, res) => {
       },
     ]);
 
-    let purse = 0;
-
-    squads.forEach((player) => {
-      purse += player.playerData.sellingPrice;
-    });
+    const purse = squads.reduce(
+      (total, player) => total + player.playerData.sellingPrice,
+      0
+    );
 
     res.status(200).send({
       success: true,

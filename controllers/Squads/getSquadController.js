@@ -1,39 +1,41 @@
-const playerModel = require("../../models/playerModel");
-
 const getSquadController = async (req, res) => {
-  const email = req.user.user.email;
+  let email = req.user.user.email;
 
   try {
-    const squads = await playerModel.aggregate([
-      {
-        $match: {
-          currentTeam: email,
-        },
-      },
-      {
-        $lookup: {
-          from: "matches",
-          localField: "match",
-          foreignField: "_id",
-          as: "matchData",
-        },
-      },
-      {
-        $unwind: "$matchData",
-      },
-      {
-        $project: {
-          _id: 0,
-          playerData: "$$ROOT",
-        },
-      },
-    ]);
+    const findPlayer = await playerModel.findOne({ email: email });
 
-    let purse = 0;
+    if (!findPlayer) {
+      const findUser = await userModel.findOne({
+        teamname: req.user.user.teamname,
+      });
+      email = findUser ? findUser.email : email;
+    }
 
-    squads.forEach((player) => {
-      purse += player.playerData.sellingPrice;
-    });
+    const squads = await playerModel
+      .aggregate([
+        { $match: { currentTeam: email } },
+        {
+          $lookup: {
+            from: "matches",
+            localField: "match",
+            foreignField: "_id",
+            as: "matchData",
+          },
+        },
+        { $unwind: "$matchData" },
+        {
+          $project: {
+            _id: 0,
+            playerData: "$$ROOT",
+          },
+        },
+      ])
+      .lean(); // Use lean for better performance
+
+    const purse = squads.reduce(
+      (total, player) => total + player.playerData.sellingPrice,
+      0
+    );
 
     res.status(200).send({
       success: true,
