@@ -41,6 +41,7 @@ const submissionController = require("../controllers/Weekly-Team/submissionContr
 const hammerController = require("../controllers/Auction/hammerController");
 const sellPlayerController = require("../controllers/Auction/sellPlayerController");
 const unsellPlayerController = require("../controllers/Auction/unsellPlayerController");
+const auctionController = require("../controllers/Auction/auctionController");
 
 // All Request Controllers
 
@@ -103,5 +104,8 @@ router.post("/sellplayer", verifyToken, sellPlayerController);
 
 // HAMMER || METHOD POST
 router.post("/unsellplayer", verifyToken, unsellPlayerController);
+
+// AUCTION || METHOD GET
+router.get("/auction", verifyToken, auctionController);
 
 module.exports = router;
