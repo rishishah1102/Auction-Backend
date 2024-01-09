@@ -1,8 +1,11 @@
+const playerModel = require("../../models/playerModel");
+const userModel = require("../../models/userModel");
+
 const getSquadController = async (req, res) => {
   let email = req.user.user.email;
 
   try {
-    const findPlayer = await playerModel.findOne({ email: email });
+    const findPlayer = await playerModel.findOne({ currentTeam: email });
 
     if (!findPlayer) {
       const findUser = await userModel.findOne({
@@ -11,26 +14,26 @@ const getSquadController = async (req, res) => {
       email = findUser ? findUser.email : email;
     }
 
-    const squads = await playerModel
-      .aggregate([
-        { $match: { currentTeam: email } },
-        {
-          $lookup: {
-            from: "matches",
-            localField: "match",
-            foreignField: "_id",
-            as: "matchData",
-          },
+    const cursor = playerModel.aggregate([
+      { $match: { currentTeam: email } },
+      {
+        $lookup: {
+          from: "matches",
+          localField: "match",
+          foreignField: "_id",
+          as: "matchData",
         },
-        { $unwind: "$matchData" },
-        {
-          $project: {
-            _id: 0,
-            playerData: "$$ROOT",
-          },
+      },
+      { $unwind: "$matchData" },
+      {
+        $project: {
+          _id: 0,
+          playerData: "$$ROOT",
         },
-      ])
-      .lean(); // Use lean for better performance
+      },
+    ]);
+
+    const squads = await cursor.exec();
 
     const purse = squads.reduce(
       (total, player) => total + player.playerData.sellingPrice,
@@ -44,6 +47,7 @@ const getSquadController = async (req, res) => {
       purse,
     });
   } catch (error) {
+    console.error("Error:", error);
     res.status(500).send({
       success: false,
       message: "Error in fetching the data",
