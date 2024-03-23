@@ -30,7 +30,7 @@ const leaderBoardController = async (req, res) => {
       {
         $group: {
           _id: "$_id",
-          name: { $first: "$username" },
+          name: { $first: "$teamname" },
           ep: { $sum: "$playerMatches.earnedPoints" },
           bep: { $sum: "$playerMatches.benchedPoints" },
         },

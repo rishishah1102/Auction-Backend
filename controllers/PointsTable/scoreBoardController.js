@@ -28,7 +28,7 @@ const scoreBoardController = async (req, res) => {
       {
         $project: {
           _id: 0,
-          username: "$userData.username",
+          username: "$userData.teamname",
           name: "$playerName",
           country: "$country",
           matchData: 1, // Include the entire match data
