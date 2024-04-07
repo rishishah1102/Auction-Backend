@@ -26,6 +26,7 @@ const scoreBoardController = require("../controllers/PointsTable/scoreBoardContr
 const playerScoresController = require("../controllers/PointsTable/playerScoresController");
 const updateScoresController = require("../controllers/PointsTable/updateScoresController");
 const changexiController = require("../controllers/PointsTable/changexiController");
+const changePrevxiController = require("../controllers/PointsTable/changePrevXiController");
 
 // players
 const getAllPlayerController = require("../controllers/Players/getAllPlayerController");
@@ -83,6 +84,9 @@ router.post("/updatescores", verifyToken, updateScoresController);
 
 // CHANGEXI || METHOD POST
 router.post("/changexi", verifyToken, changexiController);
+
+// CHANGEXI TO PREV || METHOD POST
+router.post("/changeprevxi", verifyToken, changePrevxiController);
 
 // ALL PLAYERS || METHOD GET
 router.get("/players", verifyToken, getAllPlayerController);
